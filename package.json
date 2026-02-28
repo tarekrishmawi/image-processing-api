@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/tarekrishmawi/image-processing-api#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

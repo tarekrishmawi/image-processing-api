@@ -11,3 +11,8 @@ logs
 .DS_Store
 Thumbs.db
 
+# Ignore assets images and processed images
+assets/full/*
+!assets/full/.gitkeep
+assets/thumb/*
+!assets/thumb/.gitkeep
