@@ -1,8 +1,10 @@
 import express from 'express';
-import processImage from '../controllers/imagesController';
+import resizeController from '../controllers/resizeController';
+import rotateController from '../controllers/rotateController';
 
 const router = express.Router();
 
-router.get('/', processImage);
+router.get('/resize', resizeController);
+router.get('/rotate', rotateController);
 
 export default router;

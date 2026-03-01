@@ -16,3 +16,5 @@ assets/full/*
 !assets/full/.gitkeep
 assets/thumb/*
 !assets/thumb/.gitkeep
+assets/rotated/*
+!assets/thumb/.gitkeep
