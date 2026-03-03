@@ -5,11 +5,11 @@ import fs from 'fs';
 const resizeImage = async (
   filename: string,
   width: number,
-  height: number
+  height: number,
 ): Promise<string> => {
   const fullPath = path.resolve(`assets/full/${filename}.jpg`);
   const thumbPath = path.resolve(
-    `assets/thumb/${filename}_${width}_${height}.jpg`
+    `assets/thumb/${filename}_${width}_${height}.jpg`,
   );
 
   // Check if resized image already exists (cache)
@@ -18,9 +18,7 @@ const resizeImage = async (
   }
 
   // Resize and save
-  await sharp(fullPath)
-    .resize(width, height)
-    .toFile(thumbPath);
+  await sharp(fullPath).resize(width, height).toFile(thumbPath);
 
   return thumbPath;
 };

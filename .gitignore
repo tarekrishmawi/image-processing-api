@@ -16,3 +16,5 @@ assets/thumb/*
 !assets/thumb/.gitkeep
 assets/rotated/*
 !assets/thumb/.gitkeep
+assets/blurred/*
+!assets/thumb/.gitkeep

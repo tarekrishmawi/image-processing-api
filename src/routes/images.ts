@@ -1,10 +1,28 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import resizeController from '../controllers/resizeController';
 import rotateController from '../controllers/rotateController';
+import blurController from '../controllers/blurController';
 
-const router = express.Router();
+const imagesRoute = express.Router();
 
-router.get('/resize', resizeController);
-router.get('/rotate', rotateController);
+// Match the base path '/api/images'
+imagesRoute.get('/', (req: Request, res: Response) => {
+  const action = req.query.action;
 
-export default router;
+  if (action === 'resize') {
+    return resizeController(req, res);
+  }
+
+  if (action === 'rotate') {
+    return rotateController(req, res);
+  }
+  if (action === 'blur') {
+    return blurController(req, res);
+  }
+
+  res
+    .status(400)
+    .send('Please specify a valid action (resize, rotate, or blur)');
+});
+
+export default imagesRoute;
