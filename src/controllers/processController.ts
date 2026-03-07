@@ -5,25 +5,12 @@ const processController = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
+  const query = { ...req.query };
   const { filename, width, height, angle, sigma, flip, flop, grayscale } =
-    req.query as {
-      filename?: string;
-      width?: string;
-      height?: string;
-      angle?: string;
-      sigma?: string;
-      flip?: string;
-      flop?: string;
-      grayscale?: string;
-    };
-
-  if (!filename) {
-    res.status(400).send('Filename is required');
-    return;
-  }
+    query;
 
   try {
-    const processor = await ImageProcessor.create(filename);
+    const processor = await ImageProcessor.create(filename as string);
 
     if (width && height) {
       processor.resize(Number(width), Number(height));
