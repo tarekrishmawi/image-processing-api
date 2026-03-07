@@ -1,6 +1,6 @@
 import express from 'express';
 import imagesRoute from './routes/images';
-import { ensureOutputFolders } from './utilities/ensureFolders';
+import { ensureOutputFolder } from './utilities/ensureFolder';
 
 const app = express();
 const port = 3000;
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 app.use('/api/images', imagesRoute);
 
 async function startServer() {
-  await ensureOutputFolders(); // make sure folders exist
+  await ensureOutputFolder(); // make sure folder exists
 
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);

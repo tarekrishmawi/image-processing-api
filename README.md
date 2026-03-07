@@ -101,53 +101,29 @@ Example:
 
 http://localhost:3000/
 ```
-**Image Processing Endpoints**
-
-1. Resize endpoint used to resize images.
-
-
-GET /images/resize
-Example:
-```bash
-http://localhost:3000/images/resize?filename=fjord&width=200&height=200
-```
-
-2. Rotate endpoint used to rotate images.
-
-
-GET /images/rotate
-Example:
-```bash
-http://localhost:3000/images/rotate?filename=fjord&angle=90
-```
-
-3. Blur endpoint used to blur images.
-
-
-GET /images/blur
-Example:
-```bash
-http://localhost:3000/images/blur?filename=fjord&blurLevel=2
-```
-
-
+**Image Processing Endpoint**
 **Multiple Operations**
+
 using Sharp chaining 
 
 Example with several transformations:
 
-GET /images/blur
+GET /images/process
+
 Example:
 ```bash
-http://localhost:3000/images/process?filename=fjord&width=300&height=300&angle=180&grayscale=true
+http://localhost:3000/api/images/process?filename=fjord&angle=90&width=1200&height=1200&sigma=2&flip=true&flop=true&grayscale=true
 ```
 
 | Parameter | Required | Example | Description |
 |-----------|----------|---------|-------------|
 | filename  | Yes      | fjord   | Image name in `assets/full` |
+| angle     | No       | 90      | Rotation angle |
 | width     | No       | 200     | Resize width |
 | height    | No       | 200     | Resize height |
-| angle     | No       | 90      | Rotation angle |
+| sigma     | No       | 0.3-1000| Blur value |
+| flip      | No       | true    | flip vertically |
+| flop      | No       | true    | flip horizontally |
 | grayscale | No       | true    | Convert to grayscale |
 
 ## Notes

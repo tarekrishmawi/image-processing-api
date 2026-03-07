@@ -13,5 +13,3 @@ Thumbs.db
 
 # Ignore generated images
 assets/processed/*
-assets/rotated/*
-assets/blurred/*

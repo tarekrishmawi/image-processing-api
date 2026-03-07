@@ -5,13 +5,17 @@ const processController = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const { filename, width, height, angle, grayscale } = req.query as {
-    filename?: string;
-    width?: string;
-    height?: string;
-    angle?: string;
-    grayscale?: string;
-  };
+  const { filename, width, height, angle, sigma, flip, flop, grayscale } =
+    req.query as {
+      filename?: string;
+      width?: string;
+      height?: string;
+      angle?: string;
+      sigma?: string;
+      flip?: string;
+      flop?: string;
+      grayscale?: string;
+    };
 
   if (!filename) {
     res.status(400).send('Filename is required');
@@ -27,6 +31,18 @@ const processController = async (
 
     if (angle) {
       processor.rotate(Number(angle));
+    }
+
+    if (sigma) {
+      processor.blur(Number(sigma));
+    }
+
+    if (flip === 'true') {
+      processor.flip();
+    }
+
+    if (flop === 'true') {
+      processor.flop();
     }
 
     if (grayscale === 'true') {
