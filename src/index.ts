@@ -1,6 +1,7 @@
 import express from 'express';
 import imagesRoute from './routes/images';
 import { ensureOutputFolder } from './utilities/ensureFolder';
+import { logger } from './middleware/logger';
 
 const app = express();
 const port = 3000;
@@ -9,15 +10,11 @@ app.get('/', (req, res) => {
   res.send('Image Processing API is runninng');
 });
 
-app.use((req, res, next) => {
-  console.log(`Request received: ${req.method} ${req.url}`);
-  next();
-});
-
-app.use('/api/images', imagesRoute);
+app.use('/api/images', logger, imagesRoute);
 
 async function startServer() {
-  await ensureOutputFolder(); // make sure folder exists
+  await ensureOutputFolder('assets/processed'); // make sure assets/processed folder exists
+  await ensureOutputFolder('logs'); // make sure logs folder exists
 
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);
