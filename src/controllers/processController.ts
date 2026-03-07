@@ -19,7 +19,7 @@ const processController = async (
   }
 
   try {
-    const processor = new ImageProcessor(filename);
+    const processor = await ImageProcessor.create(filename);
 
     if (width && height) {
       processor.resize(Number(width), Number(height));

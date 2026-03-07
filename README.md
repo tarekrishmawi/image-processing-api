@@ -8,7 +8,6 @@ The API supports multiple image operations such as:
 - Resize images
 - Rotate images
 - Blur images
-- Convert images to grayscale
 - Multiple operations using Sharp constructor
 
 Cache processed images for faster responses
@@ -93,7 +92,7 @@ npm install
 ## API Endpoints
 
 **Base Endpoint**
-Returns a simple welcome message.
+Returns a simple message to confirm that the server is running
 
 ```bash
 GET /
@@ -106,28 +105,28 @@ http://localhost:3000/
 
 1. Resize endpoint used to resize images.
 
-```bash
+
 GET /images/resize
 Example:
-
+```bash
 http://localhost:3000/images/resize?filename=fjord&width=200&height=200
 ```
 
-2. Rotate endpoint used to resize images.
+2. Rotate endpoint used to rotate images.
 
-```bash
+
 GET /images/rotate
 Example:
-
+```bash
 http://localhost:3000/images/rotate?filename=fjord&angle=90
 ```
 
-3. Blur endpoint used to resize images.
+3. Blur endpoint used to blur images.
 
-```bash
+
 GET /images/blur
 Example:
-
+```bash
 http://localhost:3000/images/blur?filename=fjord&blurLevel=2
 ```
 
@@ -136,10 +135,10 @@ http://localhost:3000/images/blur?filename=fjord&blurLevel=2
 using Sharp chaining 
 
 Example with several transformations:
-```bash
+
 GET /images/blur
 Example:
-
+```bash
 http://localhost:3000/images/process?filename=fjord&width=300&height=300&angle=180&grayscale=true
 ```
 

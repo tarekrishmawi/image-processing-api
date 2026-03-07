@@ -1,39 +1,63 @@
 import sharp, { Sharp } from 'sharp';
 import path from 'path';
-import fs from 'fs';
+import { fileExists } from '../utilities/fileHelper';
 
+// Class to handle image processing with method chaining for multiple operations
 class ImageProcessor {
   private image: Sharp;
   private outputPath: string;
 
-  constructor(private filename: string) {
+  private constructor(image: Sharp, outputPath: string) {
+    this.image = image;
+    this.outputPath = outputPath;
+  }
+
+  static async create(filename: string): Promise<ImageProcessor> {
     const inputPath = path.resolve(`assets/full/${filename}.jpg`);
 
-    if (!fs.existsSync(inputPath)) {
-      throw new Error('File does not exist');
+    const exists = await fileExists(inputPath);
+
+    if (!exists) {
+      throw new Error(`File "${filename}" does not exist`);
     }
 
-    this.image = sharp(inputPath);
-    this.outputPath = path.resolve(`assets/thumb/${filename}_processed.jpg`);
+    const image = sharp(inputPath);
+
+    const outputPath = path.resolve(
+      `assets/processed/${filename}_processed.jpg`,
+    );
+
+    return new ImageProcessor(image, outputPath);
   }
 
   resize(width: number, height: number): this {
     this.image = this.image.resize(width, height);
+    this.outputPath = this.outputPath.replace(
+      '_processed',
+      `_w${width}_h${height}`,
+    );
     return this;
   }
 
   rotate(angle: number): this {
     this.image = this.image.rotate(angle);
+    this.outputPath = this.outputPath.replace('.jpg', `_r${angle}.jpg`);
     return this;
   }
 
   grayscale(): this {
     this.image = this.image.grayscale();
+    this.outputPath = this.outputPath.replace('.jpg', `_gray.jpg`);
     return this;
   }
 
   async toFile(): Promise<string> {
-    await this.image.toFile(this.outputPath);
+    const exists = await fileExists(this.outputPath);
+
+    if (!exists) {
+      await this.image.toFile(this.outputPath);
+    }
+
     return this.outputPath;
   }
 }

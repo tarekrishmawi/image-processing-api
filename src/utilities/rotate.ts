@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import path from 'path';
-import fs from 'fs';
-
+import { fileExists } from './fileHelper';
+// Utility function to rotate an image
 const rotateImage = async (
   filename: string,
   angle: number = 90,
@@ -12,7 +12,7 @@ const rotateImage = async (
   );
 
   // Check if rotated image already exists (cache)
-  if (fs.existsSync(rotatedPath)) {
+  if (await fileExists(rotatedPath)) {
     return rotatedPath;
   }
 

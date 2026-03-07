@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import path from 'path';
-import fs from 'fs';
-
+import { fileExists } from './fileHelper';
+// Utility function to resize an image
 const resizeImage = async (
   filename: string,
   width: number,
@@ -13,7 +13,7 @@ const resizeImage = async (
   );
 
   // Check if resized image already exists (cache)
-  if (fs.existsSync(thumbPath)) {
+  if (await fileExists(thumbPath)) {
     return thumbPath;
   }
 

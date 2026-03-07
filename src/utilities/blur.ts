@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import path from 'path';
-import fs from 'fs';
-
+import { fileExists } from './fileHelper';
+// Utility function to blur an image
 const blurImage = async (
   filename: string,
   blurAmount: number,
@@ -12,7 +12,7 @@ const blurImage = async (
   );
 
   // Check if blurred image already exists (cache)
-  if (fs.existsSync(blurPath)) {
+  if (await fileExists(blurPath)) {
     return blurPath;
   }
 
