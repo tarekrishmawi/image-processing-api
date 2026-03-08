@@ -126,6 +126,12 @@ http://localhost:3000/api/images/process?filename=fjord&angle=90&width=1200&heig
 | flop      | No       | true    | flip horizontally |
 | grayscale | No       | true    | Convert to grayscale |
 
+### Supported Image Formats
+The API supports the following image formats:
+* **JPEG** (`.jpg`, `.jpeg`)
+* **PNG** (`.png`)
+* **WebP** (`.webp`)
+  
 ## Notes
 - All image processing operations are handled using the Sharp library.
 
