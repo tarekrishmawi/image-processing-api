@@ -41,7 +41,14 @@ const processController = async (
     return res.sendFile(outputPath);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
+
+    if (error instanceof Error && error.message.includes('not found')) {
+      res.status(404).send(error.message);
+      return;
+    }
+
     res.status(500).send(`Error processing image: ${message}`);
+    return;
   }
 };
 
